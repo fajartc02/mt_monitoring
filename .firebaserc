@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "maintenanceMonitoringKarawang": "maintenancemonitoringkarawang",
+    "default": "maintenancemonitoringkarawang"
+  }
+}
