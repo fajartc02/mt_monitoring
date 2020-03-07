@@ -40,6 +40,10 @@ export default [
     view: 'SafetyPatrol'
   },
   {
+    path: '/safetyPatrol/list',
+    view: 'ListEmployeesPatrol'
+  },
+  {
     path: '/upgrade',
     name: 'Upgrade to PRO',
     view: 'Upgrade'

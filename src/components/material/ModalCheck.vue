@@ -19,7 +19,7 @@
             <v-btn dark flat @click="dialog = false">Save</v-btn>
           </v-toolbar-items>
         </v-toolbar>
-        <FormCheckPatrol :propsDataId="idReceive(propsData)" :propsUserData="userData"/>
+        <FormCheckPatrol :propsEmployeeData="propsData"/>
         <div style="flex: 1 1 auto;"></div>
       </v-card>
     </v-dialog>
@@ -48,9 +48,9 @@ import FormCheckPatrol from './FormCheckPatrol.vue'
     },
     methods: {
       idReceive(val) {
-        this.userData.userName = val.name
-        this.userData.noreg = val.noreg
-        this.userData.id = val._id
+        // this.userData.name_employee = val.name
+        // this.userData.noreg_employee = val.noreg
+        // this.userData.id = val._id
       }
     },
     mounted() {

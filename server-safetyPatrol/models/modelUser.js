@@ -20,6 +20,18 @@ const userSchema = new Schema({
     stopLamp: String,
     lfSein: String,
     rgSein: String,
+    lfSpion: String,
+    rgSpion: String,
+    simChecked: String,
+    sinarMasChecked: String,
+    stnkChecked: String,
+    helm: String,
+    klakson: String,
+    shoe: String,
+    wheel: String,
+    rainCoat: String,
+    spareLampFr: String,
+    spareLampBrake: String,
     note: String,
     dateCheck: Date
   }]

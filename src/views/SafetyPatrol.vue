@@ -13,7 +13,7 @@
         </v-text-field>
       </v-flex>
     </v-layout>
-      <ModalAddSim v-if="admin === 'true'"/>
+      <ModalRegister v-if="admin === 'true'"/>
     <v-container
       fluid
       grid-list-xl
@@ -30,25 +30,28 @@
           >
             <template v-slot:items="props">
               <td style="width: 10px">{{props.index + 1}}</td>
-              <td class="text-xs-left">{{ props.item.name}}</td>
-              <td class="text-xs-left">{{ props.item.noreg}}</td>
+              <td class="text-xs-left">{{ props.item.name_employee}}</td>
+              <td class="text-xs-left">{{ props.item.noreg_employee}}</td>
               <td class="text-xs-left">{{ props.item.shift }}</td>
-              <td class="text-xs-left">{{ props.item.noPolice }}</td>
+              <td class="text-xs-left">{{ props.item.no_polisi }}</td>
 
               <!-- Logic Condition MBSim -->
               <td>
-                {{ props.item.simValid }}
+                {{ props.item.simValidClient }}
               </td>
 
               <!-- Logic Condition MBStnk -->
               <td>
-                {{ props.item.stnkValid }}
+                {{ props.item.stnkValidClient }}
               </td>
               <td v-if="admin === 'true'">
-                <v-btn outline color="info">
-                  Edit
-                </v-btn>
-                <v-btn outline color="error" @click="() => removeUser(props.item._id)">
+                <ModalEditUser :propsData="props.item"/>
+              </td>
+              <td class="text-xs-center" v-else>
+                <b>Auth Admin</b>
+              </td>
+              <td v-if="admin === 'true'">
+                <v-btn outline color="error" @click="() => removeUser(props.item.id)">
                   Delete
                 </v-btn>
               </td>
@@ -66,11 +69,22 @@
         </v-flex>
       </v-layout>
     </v-container>
+    <v-container>
+      <v-layout 
+        justify-center
+        align-center
+      >
+        <v-btn color="info" to="/safetyPatrol/list">
+          Employees Check Patrol
+        </v-btn>
+      </v-layout>
+    </v-container>
   </div>
 </template>
 
 <script>
-import ModalAddSim from '../components/material/ModalAddUser.vue'
+import ModalRegister from '../components/material/ModalAddUser.vue'
+import ModalEditUser from '../components/material/ModalEditUser.vue'
 import { mapActions, mapState } from 'vuex';
 import db from '../firebase.js'
 import ModalCheck from '../components/material/ModalCheck.vue'
@@ -93,7 +107,8 @@ export default {
         { text: 'No Polisi', value: 'noPolisi' },
         { text: 'Masa Berlaku SIM', value: 'mBSim' },
         { text: 'Masa Berlaku STNK', value: 'mBStnk' },
-        { text: 'Actions', value: 'actions', align: 'center' },
+        { text: 'Edit', value: 'actions', align: 'center' },
+        { text: 'Delete', value: 'actions', align: 'center' },
         { text: 'Check Patrol', value: 'check', align: 'center' },
       ],
       users: [],
@@ -118,22 +133,23 @@ export default {
     }
   },
   components: {
-    ModalAddSim,
-    ModalCheck
+    ModalRegister,
+    ModalCheck,
+    ModalEditUser
   },
   mounted() {
     // firebase hosting only allow https
     // http://ec2-18-212-193-68.compute-1.amazonaws.com:3000/users
-    axios.get('http://localhost:3000/users')
+    axios.get('http://localhost:3000/employees')
     .then((result) => {
-      result.data.data.map(item => {
-        return item.simValid = moment(item.simValid).format("MMM Do YY")
+      result.data.data.recordset.map(item => {
+        return item.simValidClient = moment(item.berlaku_sim).calendar()
       })
-      result.data.data.map(item => {
-        return item.stnkValid = moment(item.stnkValid).format("MMM Do YY")
+      result.data.data.recordset.map(item => {
+        return item.stnkValidClient = moment(item.berlaku_stnk).calendar()
       })
-      this.users = result.data.data
-      console.log(result.data.data)
+      this.users = result.data.data.recordset
+      console.log(result.data.data.recordset)
     }).catch((err) => {
       console.log(err.message);
     })

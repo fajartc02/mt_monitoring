@@ -5,7 +5,7 @@
     grid-list-xl
   >
     <v-layout wrap>
-      <h1>Doorprize 1 Lucky Randomize QCC EPKD</h1>
+      <h2>Doorprize 1 Lucky Randomize QCC PASK3D</h2>
       <div class="container">
       <h2>Let's Start Your Lucky Randomizer</h2>
       <h1>{{random}}</h1>
@@ -40,7 +40,7 @@
       </v-carousel> -->
     </v-layout>
     <v-layout wrap>
-      <h1>Doorprize 2 Lucky Randomize QCC EPKD</h1>
+      <h2>Doorprize 2 Lucky Randomize QCC PASK3D</h2>
       <div class="container">
       <h2>Let's Start Your Lucky Randomizer</h2>
       <h1>{{random2}}</h1>

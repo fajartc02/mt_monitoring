@@ -188,5 +188,9 @@ export default {
       padding-left: 15px;
       padding-right: 15px;
     }
+
+    a {
+      text-decoration: none;
+    }
   }
 </style>
