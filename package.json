@@ -12,7 +12,7 @@
     "chartist": "0.11.0",
     "moment": "^2.24.0",
     "nexmo": "^2.4.1",
-    "node-sass": "^4.9.3",
+    "node-sass": "^7.0.0",
     "sass-loader": "^7.1.0",
     "sweetalert2": "^8.10.2",
     "timers": "^0.1.1",
